@@ -1,0 +1,5 @@
+{
+    "base_url": "http://localhost:8083",
+    "prefixes": ["Ки", "Льв"],
+    "location_ids": [8, 15]
+}
