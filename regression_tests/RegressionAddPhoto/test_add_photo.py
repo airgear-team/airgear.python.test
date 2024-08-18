@@ -13,12 +13,14 @@ class TestImageAPI(unittest.TestCase):
 
     def test_add_image_without_auth(self):
         url = f"{base_url}/images/1"
-        files = {'images': open('earth.jpg', 'rb')}
 
-        response = requests.post(url, files=files)
+        with open('earth.jpg', "rb") as image_file:
+            files = {'images': ('earth.jpg', image_file, 'image/jpeg')}
 
-        # Перевіряємо, чи був повернутий очікуваний код статусу
-        self.assertEqual(response.status_code, 404, f"Expected status code 404, but got {response.status_code}")
+            response = requests.post(url, files=files)
+
+            # Перевіряємо, чи був повернутий очікуваний код статусу
+            self.assertEqual(response.status_code, 404, f"Expected status code 404, but got {response.status_code}")
 
     def test_add_image_with_auth(self):
         url = f"{base_url}/images/1"
@@ -32,7 +34,6 @@ class TestImageAPI(unittest.TestCase):
             response = requests.post(url, files=files, headers=headers)
 
             # Перевіряємо, чи був повернутий очікуваний код статусу
-            self.assertEqual(response.status_code, 200, f"Expected status code 200, but got {response.status_code}")
-
+            self.assertEqual(response.status_code, 201, f"Expected status code 201, but got {response.status_code}")
 
 #  TODO: Додавати може тільки той, хто створив товар
