@@ -33,3 +33,6 @@ class TestImageAPI(unittest.TestCase):
 
             # Перевіряємо, чи був повернутий очікуваний код статусу
             self.assertEqual(response.status_code, 200, f"Expected status code 200, but got {response.status_code}")
+
+
+#  TODO: Додавати може тільки той, хто створив товар
