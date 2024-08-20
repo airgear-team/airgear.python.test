@@ -6,7 +6,7 @@ import requests
 base_url = "http://localhost:8080"
 
 # Bearer Token для автентифікації
-bearer_token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJncmlpaWluNDEuZG9kZTcxQGV4YW1wbGUuY29tIiwicm9sZXMiOiJST0xFX1VTRVIiLCJpYXQiOjE3MjM5NzQzNDEsImV4cCI6MTcyMzk5MjM0MX0.lp7aEpPAY9L5FcS5elUDQAh4jk9ArJgu5517gqU1JVI"
+bearer_token = "your_bearer_token" # Замість "your_bearer_token" вставте реальний токен
 
 
 class TestImageAPI(unittest.TestCase):
