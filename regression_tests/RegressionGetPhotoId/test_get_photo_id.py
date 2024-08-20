@@ -19,5 +19,16 @@ class TestGetPhotos(unittest.TestCase):
 
         response = requests.get(url, headers=headers)
 
-        self.assertEqual(response.status_code, 200, f"Expected status code 200, but got{response.status_code}")
-        self.assertTrue(response.headers['Content-type'].startswith('application/json'), 'Response is not JSON')
+        # Перевірка, чи повернутий очікуваний код статусу
+        self.assertEqual(response.status_code, 200, f"Expected status code 200, but got{response.status_code}.")
+        # Перевірка, чи відповідь у форматі JSON
+        self.assertTrue(response.headers['Content-type'].startswith('application/json'), 'Response is not JSON.')
+        response_data = response.json()
+        self.assertGreater(len(response_data), 0, "Response JSON is empty.")
+
+        for image in response_data:
+            self.assertIn('imageUrl', image, "Missing 'imageUrl' in response JSON.")
+
+
+if __name__ == "__main__":
+    unittest.main()
