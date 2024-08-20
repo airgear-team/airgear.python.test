@@ -2,8 +2,8 @@ import unittest
 import requests
 from mail_num_generator import Generator
 
-class TestRegisterUser(unittest.TestCase):
 
+class TestRegisterUser(unittest.TestCase):
     BASE_URL = "http://localhost:8080/auth"
 
     def test_register_user(self):
@@ -29,6 +29,7 @@ class TestRegisterUser(unittest.TestCase):
         response_data = response.json()
         self.assertIn("token", response_data, "Response JSON does not contain 'token'")
         print(f"Registration successful, token received: {response_data['token']}")
+
 
 if __name__ == '__main__':
     unittest.main()

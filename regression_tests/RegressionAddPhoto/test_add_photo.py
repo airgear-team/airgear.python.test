@@ -6,10 +6,10 @@ import requests
 base_url = "http://localhost:8080"
 
 # Bearer Token для автентифікації
-bearer_token = "your_bearer_token" # Замість "your_bearer_token" вставте реальний токен
+bearer_token = "your_bearer_token"  # Замість "your_bearer_token" вставте реальний токен
 
 
-class TestImageAPI(unittest.TestCase):
+class TestImage(unittest.TestCase):
 
     def test_add_image_without_auth(self):
         url = f"{base_url}/images/1"
@@ -36,4 +36,8 @@ class TestImageAPI(unittest.TestCase):
             # Перевіряємо, чи був повернутий очікуваний код статусу
             self.assertEqual(response.status_code, 201, f"Expected status code 201, but got {response.status_code}")
 
+
 #  TODO: Додавати може тільки той, хто створив товар
+
+if __name__ == "__main__":
+    unittest.main()
