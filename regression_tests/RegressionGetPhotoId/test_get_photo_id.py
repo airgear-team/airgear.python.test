@@ -47,7 +47,10 @@ class TestGetPhotos(unittest.TestCase):
             response = requests.get(url, headers=headers)
 
             # Перевірка на очікуваний код статусу
-            self.assertEqual(response.status_code, 200, f'Expected 200, but got {response.status_code}')
+            self.assertEqual(response.status_code, 200, f'Expected 200, but got {response.status_code}.')
+            # Перевірка чи відповідь містить зображення (перевірка на тип 'image')
+            self.assertTrue(response.headers['Content-type'].startswith('images/'),
+                            f"Response for {image_id} is not an image.")
 
 
 if __name__ == "__main__":
