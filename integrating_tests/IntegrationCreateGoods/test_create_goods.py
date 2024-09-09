@@ -4,9 +4,14 @@ import requests
 
 class TestCreateGoods(unittest.TestCase):
     BASE_URL = "http://localhost:8080/goods/"
-    AUTH_TOKEN = "your_auth_token"  # Замість "your_auth_token_here" вставте реальний токен
+    AUTH_TOKEN = "your_auth_token_here"  # Замість "your_auth_token_here" вставте реальний токен
+
+    @classmethod
+    def setUpClass(cls):
+        print("\nПідготовка до тестування створення товару...")
 
     def test_create_goods(self):
+        print("\nТестуємо успішне створення товару...")
         # Дані для створення товару
         payload = {
             "name": "Valid Product Name",  # Оновлений name
@@ -40,8 +45,11 @@ class TestCreateGoods(unittest.TestCase):
             'Authorization': f'Bearer {self.AUTH_TOKEN}'  # Додаємо заголовок авторизації
         }
 
+        print(f"Виконуємо POST-запит на URL: {self.BASE_URL} з payload: {payload}")
         # Виконуємо POST-запит
         response = requests.post(self.BASE_URL, json=payload, headers=headers)
+
+        print(f"Отримано відповідь з кодом статусу: {response.status_code}")
 
         # Якщо відповідь не є 201, виводимо її для діагностики
         if response.status_code != 201:
@@ -57,6 +65,9 @@ class TestCreateGoods(unittest.TestCase):
         self.assertEqual(response_data["name"], payload["name"], "Response 'name' does not match")
 
         # Додаткові перевірки можна додати за потребою
+
+    def tearDown(self):
+        print("Тест завершено.\n")
 
 
 if __name__ == '__main__':
