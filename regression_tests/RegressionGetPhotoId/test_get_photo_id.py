@@ -1,20 +1,23 @@
 import unittest
 import requests
 
-# URL для тестів
-base_url = "http://localhost:8080"
-
-# Bearer Token для автентифікації
-bearer_token = "your_bearer_token"  # Замість "your_bearer_token" вставте реальний токен
-
 
 class TestGetPhotos(unittest.TestCase):
+    # URL для тестів
+    BASE_URL = "http://localhost:8080"
+
+    # Bearer Token для автентифікації
+    BEARER_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJncmlpaWluNDEuZG9vZGU3MUBleGFtcGxlLmNvbSIsInJvbGVzIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzI1ODk5MjkyLCJleHAiOjE3MjU5MTcyOTJ9.KwsFoMQ2dOdCwRn7JK9uBzXV5UrDvBA-CLXg9hmEcMw"  # Замість "your_bearer_token" вставте реальний токен
+
+    @classmethod
+    def setUpClass(cls):
+        print("\nТестування почато.")
 
     def test_get_image_ids(self):
-        url = f"{base_url}/images/1/images"
+        url = f"{self.BASE_URL}/images/1/images"
 
         headers = {
-            'Authorization': f'Bearer {bearer_token}'
+            'Authorization': f'Bearer {self.BEARER_TOKEN}'
         }
 
         response = requests.get(url, headers=headers)
@@ -29,8 +32,9 @@ class TestGetPhotos(unittest.TestCase):
         for image in response_data:
             self.assertIn('imageUrl', image, "Missing 'imageUrl' in response JSON.")
 
-    def get_image_by_id(self):
+    def test_get_image_by_id(self):
 
+        # Требеа замінити IDшки, та перед цим тестом виконати RegressionAddPhoto/test_add_photo.py
         image_ids = [
             "4537ab99-6652-4c79-a207-cc91c87c4fb2",
             "2a59abd9-6fa9-4605-80cd-7381ce98e90d",
@@ -38,10 +42,10 @@ class TestGetPhotos(unittest.TestCase):
         ]
 
         for image_id in image_ids:
-            url = f"{base_url}/images/{image_id}.jpg"
+            url = f"{self.BASE_URL}/images/{image_id}.jpg"
 
             headers = {
-                'Authorization': f'Bearer {bearer_token}'
+                'Authorization': f'Bearer {self.BEARER_TOKEN}'
             }
 
             response = requests.get(url, headers=headers)
